@@ -1,0 +1,23 @@
+AWS Centralized Log Analysis Architecture
+
+📌 Overview
+
+This project demonstrates the design and implementation of a centralized AWS log analysis solution to monitor and detect suspicious activity across cloud resources.
+
+🛠 Services Used
+	•	AWS CloudTrail
+	•	Amazon S3
+	•	Amazon CloudWatch Logs
+	•	AWS IAM
+	•	Amazon Athena
+
+🔐 Security Features
+	•	Encrypted S3 log storage
+	•	IAM least privilege access control
+	•	Log integrity validation
+	•	Centralized monitoring and alerting
+  🎯 Key Outcomes
+	•	Enabled centralized API activity logging
+	•	Improved visibility into IAM activity
+	•	Designed scalable and secure logging pipeline
+	•	Implemented monitoring and alerting strategy

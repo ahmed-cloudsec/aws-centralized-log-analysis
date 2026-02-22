@@ -1,0 +1,28 @@
+{
+  "Rules": [
+    {
+      "ID": "security-log-archive-lifecycle",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "entity="
+      },
+      "Transitions": [
+        {
+          "Days": 90,
+          "StorageClass": "STANDARD_IA"
+        },
+        {
+          "Days": 180,
+          "StorageClass": "GLACIER"
+        },
+        {
+          "Days": 365,
+          "StorageClass": "DEEP_ARCHIVE"
+        }
+      ],
+      "Expiration": {
+        "Days": 2555
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "Version": "2012-10-17",
+  "Id": "abc-log-archive-kms-policy",
+  "Statement": [
+    {
+      "Sid": "EnableKeyAdministration",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::YOUR_LOG_ARCHIVE_ACCOUNT_ID:root"
+      },
+      "Action": "kms:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowS3UseOfKeyForLogArchiveBucket",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*",
+        "kms:DescribeKey"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "YOUR_LOG_ARCHIVE_ACCOUNT_ID"
+        },
+        "StringLike": {
+          "aws:SourceArn": "arn:aws:s3:::abc-security-log-archive-prod"
+        }
+      }
+    },
+    {
+      "Sid": "AllowCriblEncryptOnly",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::YOUR_LOG_ARCHIVE_ACCOUNT_ID:role/CriblIngestionRole"
+      },
+      "Action": [
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowCentralSecurityDecryptForInvestigation",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::YOUR_SECURITY_ACCOUNT_ID:role/CentralSecurityReadRole"
+      },
+      "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "WriteOnlyToEntity4Prefix",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:AbortMultipartUpload",
+        "s3:ListMultipartUploadParts",
+        "s3:PutObjectTagging"
+      ],
+      "Resource": "arn:aws:s3:::abc-security-log-archive-prod/entity=4/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:RequestObjectTag/entity_id": "4",
+          "s3:RequestObjectTag/environment": "prod"
+        }
+      }
+    }
+  ]
+}
